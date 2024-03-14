@@ -16,3 +16,12 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->group(['prefix' => 'v1', 'middleware' => 'checkAuthorization'], function () use ($router) {
+    $router->get('/authors', ['uses' => 'AuthorController@index']);
+    $router->get('/authors/{id}', ['uses' => 'AuthorController@read']);
+    $router->post('/authors', ['uses' => 'AuthorController@create']);
+    $router->put('/authors/{id}', ['uses' => 'AuthorController@update']);
+    $router->patch('/authors/{id}', ['uses' => 'AuthorController@patch']);
+    $router->delete('/authors/{id}', ['uses' => 'AuthorController@delete']);
+});
