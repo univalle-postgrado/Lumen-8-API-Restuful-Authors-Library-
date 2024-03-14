@@ -66,7 +66,7 @@ class AuthorController extends Controller
 
     public function patch($id, Request $request) {
         $rules = [
-            'name' => 'max:60|unique:authors',
+            'name' => 'max:60|unique:authors,name,' . $id,
             'nationality' => 'max:30'
         ];
         $this->validate($request, $rules);
